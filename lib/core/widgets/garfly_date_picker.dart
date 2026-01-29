@@ -21,7 +21,7 @@ class GarflyDatePicker extends StatelessWidget {
     String displayText = selectedDate == null
         ? 'Selecciona tu fecha'
         : DateFormat('dd / MM / yyyy').format(selectedDate!);
-
+    final initDate = selectedDate ?? DateTime(2000);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -31,11 +31,10 @@ class GarflyDatePicker extends StatelessWidget {
           onTap: () async {
             FocusScope.of(context).unfocus();
 
-
             // Abrimos el selector de fecha nativo
             final DateTime? picked = await showDatePicker(
               context: context,
-              initialDate: DateTime(2000), // Fecha sugerida al abrir
+              initialDate: initDate, // Fecha sugerida al abrir
               firstDate: DateTime(1920), // Fecha mínima
               lastDate: DateTime.now(), // No puedes nacer en el futuro
               locale: const Locale("es", "ES"),

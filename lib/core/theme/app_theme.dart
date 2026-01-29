@@ -4,8 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 class AppTheme {
   static ThemeData get garflyTheme {
     const forestGreen = Color(0xFF2D6A4F);
-    const deepDark = Color(0xFF1B1C17);
-    const mediumGray = Color(0x90948A);
+    const mediumGray = Color(0x0090948a);
+    // const deepDark = Color(0xFF1B1C17);
 
     return ThemeData(
       useMaterial3: true,
@@ -16,7 +16,7 @@ class AppTheme {
         secondary: const Color(0xFF926247),
         tertiary: const Color(0xFF0077B6),
         surface: const Color(0xFFF8FAF5),
-
+    
       ),
 
       // Tipografía Material 3
@@ -25,23 +25,19 @@ class AppTheme {
           displayLarge: TextStyle(
             fontSize: 32,
             fontWeight: FontWeight.bold,
-            color: deepDark,
             letterSpacing: -0.5,
           ),
           headlineSmall: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: deepDark,
           ),
           bodyLarge: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.normal,
-            color: deepDark,
           ),
           labelLarge: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: deepDark,
           ),
           // bodyLarge: TextStyle(fontSize: 16, color: Color(0xFF44493F)),
         ),
