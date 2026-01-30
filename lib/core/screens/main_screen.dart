@@ -22,38 +22,30 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
-    final texts = theme.textTheme;
 
     return Scaffold(
       backgroundColor: colors.surface,
       body: IndexedStack(index: _selectedPageIndex, children: _pages),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: const Color(0xFF1A1A1A),
-          border: const Border(
-            top: BorderSide(color: Colors.white10, width: 0.5),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
+        currentIndex: _selectedPageIndex,
+        onTap: _onItemTapped,
+        selectedItemColor: colors.scrim,
+        type: BottomNavigationBarType.fixed,
+        selectedFontSize: 16,
+        unselectedFontSize: 16,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bug_report_outlined),
+            activeIcon: Icon(Icons.bug_report),
+            label: 'Orugas',
           ),
-        ),
-        child: BottomNavigationBar(
-          currentIndex: _selectedPageIndex,
-          onTap: _onItemTapped,
-          // backgroundColor: const Color(0xFF1A1A1A),
-          selectedItemColor: const Color(0xFF00E676), // Verde Neón para Orugas
-          unselectedItemColor: Colors.grey,
-          type: BottomNavigationBarType.fixed,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.bug_report_outlined),
-              activeIcon: Icon(Icons.bug_report),
-              label: 'Orugas',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.bug_report_outlined),
-              activeIcon: Icon(Icons.bug_report),
-              label: 'Orugas',
-            ),
-          ],
-        ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bug_report_outlined),
+            activeIcon: Icon(Icons.bug_report),
+            label: 'Orugas',
+          ),
+        ],
       ),
     );
   }

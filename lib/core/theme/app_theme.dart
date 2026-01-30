@@ -5,6 +5,7 @@ class AppTheme {
   static ThemeData get garflyTheme {
     const forestGreen = Color(0xFF2D6A4F);
     const mediumGray = Color(0x0090948a);
+    const neonGreen = Color.fromARGB(255, 1, 179, 93);
     // const deepDark = Color(0xFF1B1C17);
 
     return ThemeData(
@@ -16,7 +17,7 @@ class AppTheme {
         secondary: const Color(0xFF926247),
         tertiary: const Color(0xFF0077B6),
         surface: const Color(0xFFF8FAF5),
-    
+        scrim: neonGreen,
       ),
 
       // Tipografía Material 3
@@ -27,18 +28,11 @@ class AppTheme {
             fontWeight: FontWeight.bold,
             letterSpacing: -0.5,
           ),
-          headlineSmall: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
-          bodyLarge: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.normal,
-          ),
-          labelLarge: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
+          headlineLarge: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+          headlineMedium: TextStyle(fontSize: 20),
+          headlineSmall: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+          bodyLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+          bodyMedium: TextStyle(fontSize: 16),
           // bodyLarge: TextStyle(fontSize: 16, color: Color(0xFF44493F)),
         ),
 
@@ -50,16 +44,10 @@ class AppTheme {
         // ),
       ),
 
-      // Estilo de Cards para las Orugas
-      // cardTheme: CardTheme(
-      //   elevation: 0,
-      //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-      //   color: const Color(0xFFE2E9D8),
-      // ),
 
       // Botón de Acción Flotante
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        backgroundColor: Color(0xFF2D6A4F),
+        backgroundColor: forestGreen,
         foregroundColor: Colors.white,
         shape: StadiumBorder(),
       ),
@@ -67,16 +55,19 @@ class AppTheme {
       // EXTENSIÓN PARA EL ONBOARDING: Inputs y Botones
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: const Color(0xFFFFFFFF),
+        fillColor: Colors.white,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(100),
-          borderSide: const BorderSide(color: Color(0xFFE2E9D8)),
+          borderSide: BorderSide(color: neonGreen),
+        ),
+        hintStyle: TextStyle(
+          color: Colors.grey
         ),
       ),
 
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF2D6A4F),
+          backgroundColor: forestGreen,
           foregroundColor: Colors.white,
           minimumSize: const Size(double.infinity, 56),
           shape: const StadiumBorder(),
@@ -85,45 +76,3 @@ class AppTheme {
     );
   }
 }
-
-// import 'package:flutter/material.dart';
-
-// class LoginScreen extends StatelessWidget {
-//   const LoginScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: LayoutBuilder(
-//         builder: (context, constraints) {
-//           return SingleChildScrollView(
-//             child: ConstrainedBox(
-//               constraints: BoxConstraints(minHeight: constraints.maxWidth),
-//               child: Center(
-//                 child: Padding(
-//                   padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
-//                   child: Column(
-//                     mainAxisAlignment: MainAxisAlignment.center,
-//                     crossAxisAlignment: CrossAxisAlignment.center,
-//                     children: [
-//                       ClipRRect(
-//                         borderRadius: BorderRadius.circular(20),
-//                         child: Image.network(
-//                           "https://lh3.googleusercontent.com/aida-public/AB6AXuA1Es9jUgs5tKav8N5JVU_fZWPTMyCQJy17WJTP-xBy08pjXUj4cUoyevC_CmkZYHk5VW1VmiYdn-0sU3gMhaKOJqCkZd1wk_KtPynVkKF2UQVFX9y70qOjBqlQbgXo2SY6Bt6vINsjoAwMaSbhmaZ64Pd8Dj8Zw4zrIOjIiZnPgUPlxEWIiZBNTnG1pkOs_SI3bjHA201K6NboqQlbN2fYSgGgEN-EXrjXYPttbrbm7b7j83mDA9dLZa_FiB_kb7-i0zPf9zyf7OA",
-//                           width: 250,
-//                           fit: BoxFit.cover,
-//                         ),
-//                       ),
-//                       SizedBox(height: 30),
-//                       Text("10"),
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//             ),
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
