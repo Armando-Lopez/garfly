@@ -21,10 +21,9 @@ class _LoginFormState extends State<LoginForm> {
     final preferences = await SharedPreferences.getInstance();
     final String? savedName = preferences.getString('user_name');
 
-    if (savedName != null && mounted) {
+    if (savedName != null && context.mounted) {
       _nameController.text = savedName;
     }
-    print(savedName);
   }
 
   Future<void> _saveUserData(BuildContext context) async {

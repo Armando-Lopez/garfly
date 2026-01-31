@@ -11,26 +11,24 @@ class AddTaskForm extends StatefulWidget {
 }
 
 class _NewTaskSheetState extends State<AddTaskForm> {
-  final TextEditingController _goalController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
 
   void _onSavePressed(BuildContext context) async {
     try {
-      final name = _goalController.text.trim();
+      final name = _nameController.text.trim();
 
       if (name.isEmpty) return;
 
       final newTask = Task(name: name);
 
       // sl<AddTask>() busca el caso de uso, que a su vez usa el repo, etc.
-      await sl<AddTask>().call(newTask);
+      await serviceLocator<AddTask>().call(newTask);
 
-      if(mounted) {
-        print("object");
-      }
+      if (!context.mounted) return;
 
-      // print(result);
+      _nameController.clear();
       // Aquí devolveremos el dato a la pantalla principal
-      Navigator.pop(context, name);
+      Navigator.pop(context, true);
     } catch (e) {
       // Manejo de errores simple
       debugPrint("Error al guardar: $e");
@@ -73,7 +71,7 @@ class _NewTaskSheetState extends State<AddTaskForm> {
             const SizedBox(height: 20),
             // Input del diseño
             TextField(
-              controller: _goalController,
+              controller: _nameController,
               decoration: InputDecoration(hintText: "Ejercitarse..."),
               textCapitalization: TextCapitalization.sentences,
             ),

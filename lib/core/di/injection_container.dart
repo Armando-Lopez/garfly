@@ -5,13 +5,14 @@ import 'package:garfly/features/tasks/domain/use_cases/get_tasks.dart';
 import 'package:garfly/features/tasks/domain/repositories/task_repository.dart';
 import 'package:garfly/features/tasks/data/repositories/task_repository_impl.dart';
 
-final  sl = GetIt.instance; //Service locator
+final serviceLocator = GetIt.instance;
+final  _sl = serviceLocator; //Service locator
 
 Future<void> init() async {
   // -------------------------------------------------------------------
   // 1. CASOS DE USO (Use Cases)
   // -------------------------------------------------------------------
-  // Registramos AddTask. Cuando se pida, sl() buscará automáticamente 
+  // Registramos AddTask. Cuando se pida, _sl() buscará automáticamente 
   // el TaskRepository que registramos más abajo.
   // -------------------------------------------------------------------
   // 2. REPOSITORIOS (Repositories)
@@ -21,10 +22,10 @@ Future<void> init() async {
   // si los datos vienen de SQL o de una API
 
   // ---- TASKS ----
-  sl.registerLazySingleton(() => AddTask(sl()));
-  sl.registerLazySingleton(() => GetTasks(sl()));
-  sl.registerLazySingleton<TaskRepository>(
-    () => TaskRepositoryImpl(sl()),
+  _sl.registerLazySingleton(() => AddTask(_sl()));
+  _sl.registerLazySingleton(() => GetTasks(_sl()));
+  _sl.registerLazySingleton<TaskRepository>(
+    () => TaskRepositoryImpl(_sl()),
   );
 
 
@@ -32,5 +33,5 @@ Future<void> init() async {
   // 3. FUENTES DE DATOS (Data Sources / DB)
   // -------------------------------------------------------------------
   // Registramos la instancia de tu base de datos SQLite.
-  sl.registerLazySingleton(() => DatabaseHelper.instance); 
+  _sl.registerLazySingleton(() => DatabaseHelper.instance); 
 }

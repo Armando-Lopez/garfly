@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garfly/features/tasks/widgets/task_card.dart';
 import 'package:garfly/features/tasks/widgets/no_tasks_placeholder.dart';
 
 class TasksList extends StatelessWidget {
@@ -12,7 +13,7 @@ class TasksList extends StatelessWidget {
         : ListView.builder(
             itemCount: tasks.length,
             itemBuilder: (context, index) {
-              return Text("data");
+              return TaskCard(task: tasks[index]);
             },
           );
   }

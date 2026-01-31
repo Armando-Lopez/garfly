@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:garfly/features/tasks/domain/entities/task.dart';
 
 class TaskCard extends StatelessWidget {
-  const TaskCard({super.key});
+  final Task task;
+
+  const TaskCard({super.key, required this.task});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Text(task.name);
   }
 }

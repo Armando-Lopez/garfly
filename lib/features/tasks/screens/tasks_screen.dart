@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:garfly/features/tasks/widgets/add_task_form.dart';
+import 'package:garfly/core/di/injection_container.dart';
 import 'package:garfly/features/tasks/widgets/tasks_list.dart';
+import 'package:garfly/features/tasks/widgets/add_task_form.dart';
+import 'package:garfly/features/tasks/domain/use_cases/get_tasks.dart';
 import 'package:garfly/features/tasks/widgets/day_tasks_completed.dart';
 
 class TasksScreen extends StatefulWidget {
@@ -11,10 +13,36 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  final List _tasks = [];
+  bool _isLoadingTasks = true;
+  List _tasks = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadTasks();
+  }
+
+  Future<void> _loadTasks() async {
+    try {
+      final tasks = await serviceLocator<GetTasks>().call();
+
+      if (!context.mounted) return;
+
+      setState(() {
+        _tasks = tasks;
+        _isLoadingTasks = false;
+      });
+    } catch (e) {
+      debugPrint("Error al cargar tareas: $e");
+    } finally {
+      setState(() {
+        _isLoadingTasks = false;
+      });
+    }
+  }
 
   void _openAddTaskForm(BuildContext context) async {
-    final result = await showModalBottomSheet<String>(
+    final isSuccess = await showModalBottomSheet<bool>(
       context: context,
       isScrollControlled: true, // Permite que suba hasta arriba
       backgroundColor:
@@ -22,11 +50,9 @@ class _TasksScreenState extends State<TasksScreen> {
       builder: (context) => const AddTaskForm(),
     );
 
-    print(result);
-
-    // setState(() {
-    //   _tasks.add(result);
-    // });
+    if (isSuccess == true) {
+      _loadTasks();
+    }
   }
 
   @override
@@ -46,7 +72,11 @@ class _TasksScreenState extends State<TasksScreen> {
             spacing: 15,
             children: [
               const DayTasksCompleted(),
-              Expanded(child: TasksList(tasks: _tasks)),
+              Expanded(
+                child: _isLoadingTasks
+                    ? const Center(child: CircularProgressIndicator())
+                    : TasksList(tasks: _tasks),
+              ),
             ],
           ),
         ),

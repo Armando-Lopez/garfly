@@ -17,13 +17,7 @@ class TaskRepositoryImpl implements TaskRepository {
 
     final id = await db.insert(tableName, model.toMap());
 
-    print(id);
-    // Imprime en la consola de VS Code / Android Studio
-    debugPrint('✅ Oruga guardada en SQLite con ID: $id');
-
-    // También puedes imprimir toda la tabla para ver qué hay
-    final list = await db.query(tableName);
-    debugPrint('📊 Contenido actual de la tabla $tableName: $list');
+    // return id;
   }
 
   @override

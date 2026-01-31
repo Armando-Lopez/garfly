@@ -5,7 +5,7 @@ import 'package:garfly/core/screens/main_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:garfly/features/login/screens/login_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'core/di/injection_container.dart' as dependencyInjections;
+import 'core/di/injection_container.dart' as dependency_injections;
 
 void main() async {
   // 1. Línea obligatoria cuando el main es async
@@ -13,7 +13,7 @@ void main() async {
 
   await initializeDateFormatting('es_ES', null);
 
-  await dependencyInjections.init();
+  await dependency_injections.init();
 
   final preferences = await SharedPreferences.getInstance();
   final String? userName = preferences.getString('user_name');
